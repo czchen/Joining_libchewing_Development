@@ -154,12 +154,13 @@ CHEWING_API int chewing_get_candPerPage(ChewingContext *ctx)
 				</section>
 
 				<section>
-					<p>後來發現 candPerPage 的預設值就是 0 → divide by zero </p>
+					<p>其實預設 candidate per page 是 0 → 預設 divide by zero</p>
 				</section>
 
 				<section>
-					<p>開始修改參數檢查和預設值</p>
-					<p>修改預設值通常會造成一些問題，要小心修改</p>
+					<h2>參數檢查和預設值</h2>
+					<p>修改預設值通常會造成一些問題，要小心修改，不過 ...</p>
+					<p></p>
 					<ul>
 						<li>candidate per page (0 → 10)</li>
 						<li>preedit buffer (0 → 39)</li>
@@ -170,19 +171,29 @@ CHEWING_API int chewing_get_candPerPage(ChewingContext *ctx)
 				<section>
 					<p>順便把改過的 API 都加上 Unit Test</p>
 					<pre><code data-trim contenteditable>
-for ( i = 0; i < ARRAY_SIZE(VALUE); ++i ) {
+for (i = 0; i < ARRAY_SIZE(VALUE); ++i) {
 	chewing_set_candPerPage(ctx, VALUE[i]);
 	ok(chewing_get_candPerPage(ctx) == VALUE[i],
 		"candPerPage shall be `%d'", VALUE[i]);
 
 	// mode shall not change when set mode has invalid value.
-	for ( j = 0; j < ARRAY_SIZE(INVALID_VALUE); ++j) {
+	for (j = 0; j < ARRAY_SIZE(INVALID_VALUE); ++j) {
 		chewing_set_candPerPage(ctx, INVALID_VALUE[j]);
-		ok(chewing_get_candPerPage( ctx ) == VALUE[i],
+		ok(chewing_get_candPerPage(ctx) == VALUE[i],
 			"candPerPage shall be `%d'", VALUE[i]);
 	}
 }
 					</code></pre>
+				</section>
+
+				<section>
+					<h2>Coverage Report</h2>
+					<p><a href="https://drone.io/github.com/chewing/libchewing/files">https://drone.io/github.com/chewing/libchewing/files</a></p>
+					<img src="data/coverage.png">
+				</section>
+
+				<section>
+					<p>接下來來試試在 Windows 上 build</p>
 				</section>
 
 				<section>
@@ -223,6 +234,19 @@ chcp 65001
 
 				<section>
 					<h2>CMake</h2>
+				</section>
+
+				<section>
+					<h2>Visual Studio Solution</h2>
+					<pre><code data-trim contenteditable>
+cmake PATH -G "Visual Studio 11 Win64"
+					</code></pre>
+					<img src="data/Visual_Studio_Solution.png">
+				</section>
+
+				<section>
+					<p>Unit Test 也可以用</p>
+					<img src="data/Visual_Studio_Testing.png">
 				</section>
 
 				<section>
