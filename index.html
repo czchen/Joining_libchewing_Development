@@ -38,7 +38,7 @@
 			<div class="slides">
 				<section>
 					<h1>Joining libchewing Development</h1>
-					<p>ChangZhuo Chen(<a href="https://github.com/czchen">https://github.com/czchen</a>)</p>
+					<p>ChangZhuo Chen (<a href="https://github.com/czchen">https://github.com/czchen</a>)</p>
 				</section>
 
 				<section>
@@ -59,7 +59,7 @@
 				</section>
 
 				<section>
-					<h2>One day in Hacking Thursday</h2>
+					<p>One day in <a href="http://www.hackingthursday.org/">Hacking Thursday</a></p>
 					<ul>
 						<li>czchen: 新酷音這部份的 code 是作啥用的阿</li>
 						<li>kanru: ??? </li>
@@ -247,6 +247,54 @@ cmake PATH -G "Visual Studio 11 Win64"
 				<section>
 					<p>Unit Test 也可以用</p>
 					<img src="data/Visual_Studio_Testing.png">
+				</section>
+
+				<section>
+					<h2>travis-ci</h2>
+					<a href="https://travis-ci.org/chewing/libchewing">https://travis-ci.org/chewing/libchewing</a>
+				</section>
+
+				<section>
+					<p>只要把 .travis.yml 加 到 project 內就可以用了</p>
+				</section>
+
+				<section>
+					<p>travis-ci 會 build 下列幾種組合</p>
+					<ul>
+						<li>gcc + autotools</li>
+						<li>clang + autotools + disable-binary-data</li>
+						<li>gcc + cmake + valgrind</li>
+						<li>clang + cmake + address sanitizer</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>drone.io</h2>
+					<a href="https://drone.io/github.com/chewing/libchewing">https://drone.io/github.com/chewing/libchewing</a>
+				</section>
+
+				<section>
+					<p>設定 Commands</p>
+					<pre><code data-trim contenteditable>
+sudo apt-get install -qq lcov texinfo
+./autogen.sh
+./configure --enable-gcov
+make dist
+make check
+scripts/lcov.sh
+tar czf coveragereport.tar.gz coveragereport
+					</code></pre>
+					<p>設定 Artifacts</p>
+					<pre><code data-trim contenteditable>
+coveragereport.tar.gz
+libchewing-*.tar.gz
+					</code></pre>
+				</section>
+
+				<section>
+					<p>就可以產生 package 和 coverage report</p>
+					<a href="https://drone.io/github.com/chewing/libchewing/files">https://drone.io/github.com/chewing/libchewing/files</a>
+					<img src="data/drone.io.download.png">
 				</section>
 
 				<section>
