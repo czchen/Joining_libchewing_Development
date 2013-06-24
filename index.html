@@ -102,7 +102,7 @@
 				</section>
 
 				<section>
-					<p>先來個 coverage report</p>
+					<p>先加個 coverage report</p>
 					<pre><code data-trim contenteditable>
 dnl Enable gcov for coverage test
 AC_ARG_ENABLE(
@@ -187,6 +187,19 @@ for (i = 0; i < ARRAY_SIZE(VALUE); ++i) {
 				</section>
 
 				<section>
+					<p>再加上前輩提供的 Stress Test Script</p>
+					<pre><code data-trim contenteditable>
+commit 496cd753b7e6ce1e5c21fa574ce3e8d9cc07ed58
+Author: Kuang-che Wu &lt;kcwu@csie.org&gt;
+Date:   Fri Jan 18 17:23:33 2013 +0800
+
+	Add script to run stress test
+
+test/stresstest.py
+					</code></pre>
+				</section>
+
+				<section>
 					<h2>Coverage Report</h2>
 					<p><a href="https://drone.io/github.com/chewing/libchewing/files">https://drone.io/github.com/chewing/libchewing/files</a></p>
 					<img src="data/coverage.png">
@@ -197,11 +210,7 @@ for (i = 0; i < ARRAY_SIZE(VALUE); ++i) {
 				</section>
 
 				<section>
-					<h1>Windows 32-bits</h1>
 					<p><a href="http://sourceforge.net/projects/mingw/files/Installer/mingw-get-inst/">MinGW - Minimalist GNU for Windows</a></p>
-				</section>
-
-				<section>
 					<p>用起來很簡單，只要 s/apt/mingw/</p>
 					<pre><code data-trim contenteditable>
 mingw-get install automake
@@ -214,7 +223,7 @@ make
 				</section>
 
 				<section>
-					<p>有些小問題，不過是可用的</p>
+					<p>有些小問題需要注意一下</p>
 					<p>CR/LF → CR</p>
 					<pre><code data-trim contenteditable>
 git config core.autocrlf input
@@ -228,16 +237,64 @@ chcp 65001
 				</section>
 
 				<section>
-					<h1>Windows 64-bits</h1>
-					<p><a href="http://sourceforge.net/projects/mingw/files/Installer/mingw-get-inst/">MinGW - Minimalist GNU for Windows</a></p>
+					<p>在 Windows 上，應該要試試看 Visual Studio，不過又不想把 Visual Studio 的 project files 放到 git 上</p>
+					<p>那試試看用 CMake 好了</p>
 				</section>
 
 				<section>
-					<h2>CMake</h2>
+					<p>不過我不會 CMake，先抓個 <a href="http://www.cmake.org/cmake/help/cmake_tutorial.html">tutorial</a> 來看看吧</p>
+					<p>看起來只要把 build process 依照 CMake 的方式寫出來就好</p>
+					<p>先試試看在 Linux 上用 CMake build</p>
 				</section>
 
 				<section>
-					<h2>Visual Studio Solution</h2>
+					<p>以下是 libchewing build process</p>
+					<img src="data/build.png">
+				</section>
+
+				<section>
+					<p>依照 <a href="http://www.cmake.org/cmake/help/documentation.html">CMake manual</a> 上的說明把對應的 command 找出來</p>
+				</section>
+
+				<section>
+					<p>會遇到一些問題，不過大致上是可以 build 的</p>
+					<p><a href="https://github.com/chewing/libchewing/issues/40">[Issue 40] cmake cannot build gen_keystroke</a></p>
+					<p></p>
+				</section>
+
+				<section>
+					<p>那試試看在 Windows 上用 Visual Studio Express 2012</p>
+					<p>當然需要再修改一些東西</p>
+				</section>
+
+				<section>
+					<p>修改 tools 的 output directory</p>
+					<pre><code data-trim contenteditable>
+add_executable(sort ${TOOLS_SRC_DIR}/sort.c $&lt;TARGET_OBJECTS:common&gt;)
+add_executable(maketree ${TOOLS_SRC_DIR}/maketree.c)
+set_target_properties(${ALL_TOOLS} PROPERTIES
+		RUNTIME_OUTPUT_DIRECTORY ${TOOLS_BIN_DIR}
+		RUNTIME_OUTPUT_DIRECTORY_DEBUG ${TOOLS_BIN_DIR}
+		RUNTIME_OUTPUT_DIRECTORY_MINSIZEREL ${TOOLS_BIN_DIR}
+		RUNTIME_OUTPUT_DIRECTORY_RELEASE ${TOOLS_BIN_DIR}
+		RUNTIME_OUTPUT_DIRECTORY_RELWITHDEBINFO ${TOOLS_BIN_DIR}
+)
+					</code></pre>
+				</section>
+
+				<section>
+					<p>把 UTF-8 string 改成 \xAA 的形式</p>
+					<p><a href="http://www.nubaria.com/en/blog/?p=289">Using UTF-8 as the internal representation for strings in C and C++ with Visual Studio</a></p>
+				</section>
+
+				<section>
+					<p>拿掉 designated initializer</p>
+					<p><a href="http://social.msdn.microsoft.com/Forums/en-US/vclanguage/thread/363d81f6-2308-492d-b530-2614b333e9e0/#aeece11a-ce75-434a-b140-cb54356d904e">C99 Designated Initializers support</a></p>
+					<img src="data/visual_studio_designated_initializer.png">
+				</section>
+
+				<section>
+					<p>然後就可以用了</p>
 					<pre><code data-trim contenteditable>
 cmake PATH -G "Visual Studio 11 Win64"
 					</code></pre>

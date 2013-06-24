@@ -1,0 +1,28 @@
+digraph G {
+        common_src[label="src/common"];
+        data_bin[label="dict.dat, fonetree.dat, ..."];
+        data_src[label="data"];
+        doc_bin[label="libchewing.info"];
+        doc_src[label="doc"];
+        libchewing[label="libchewing.so.3"];
+        src[label="src, src/porting_layer"];
+        test_bin[label="test programs"];
+        test_src[label="test"];
+        tools_bin[label="sort, maketree"];
+        tools_src[label="src/tools"];
+
+        doc_src -> doc_bin;
+
+        tools_src -> tools_bin;
+        common_src -> tools_bin;
+
+        data_src -> data_bin;
+        tools_bin -> data_bin;
+
+        common_src -> libchewing;
+        src -> libchewing;
+
+        test_src -> test_bin;
+        common_src -> test_bin;
+        src -> test_bin
+}
