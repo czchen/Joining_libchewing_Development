@@ -47,18 +47,6 @@
 				</section>
 
 				<section>
-					<h2>Outline</h2>
-					<ul>
-						<li>My First Contribution</li>
-						<li>Coverage &amp; Unit Test</li>
-						<li>Valgrind &amp; AddressSanitizer</li>
-						<li>CMake</li>
-						<li>Travis-ci &amp; Launchpad Integrated</li>
-						<li>Stress Test Script</li>
-					</ul>
-				</section>
-
-				<section>
 					<p>One day in <a href="http://www.hackingthursday.org/">Hacking Thursday</a></p>
 					<ul>
 						<li>czchen: 新酷音這部份的 code 是作啥用的阿</li>
@@ -109,7 +97,7 @@ AC_ARG_ENABLE(
 	[gcov],
 	AS_HELP_STRING(
 		[--enable-gcov],
-		[Turn on gcov support @<:@default=no@:>@]),
+		[Turn on gcov support @&lt;:@default=no@:&gt;@]),
 	AS_CASE(
 		[${enableval}],
 		[yes], [ENABLE_GCOV="true"],
@@ -124,7 +112,6 @@ AS_IF([test x$ENABLE_GCOV = x"true"],
 				</section>
 
 				<section>
-					<h2>Coverage Report</h2>
 					<p><a href="http://kanru.info/chewing/lcov-check/">http://kanru.info/chewing/lcov-check/</a></p>
 					<img src="data/initial_coverage.png">
 				</section>
@@ -158,7 +145,6 @@ CHEWING_API int chewing_get_candPerPage(ChewingContext *ctx)
 				</section>
 
 				<section>
-					<h2>參數檢查和預設值</h2>
 					<p>修改預設值通常會造成一些問題，要小心修改，不過 ...</p>
 					<p></p>
 					<ul>
@@ -171,13 +157,13 @@ CHEWING_API int chewing_get_candPerPage(ChewingContext *ctx)
 				<section>
 					<p>順便把改過的 API 都加上 Unit Test</p>
 					<pre><code data-trim contenteditable>
-for (i = 0; i < ARRAY_SIZE(VALUE); ++i) {
+for (i = 0; i &lt; ARRAY_SIZE(VALUE); ++i) {
 	chewing_set_candPerPage(ctx, VALUE[i]);
 	ok(chewing_get_candPerPage(ctx) == VALUE[i],
 		"candPerPage shall be `%d'", VALUE[i]);
 
 	// mode shall not change when set mode has invalid value.
-	for (j = 0; j < ARRAY_SIZE(INVALID_VALUE); ++j) {
+	for (j = 0; j &lt; ARRAY_SIZE(INVALID_VALUE); ++j) {
 		chewing_set_candPerPage(ctx, INVALID_VALUE[j]);
 		ok(chewing_get_candPerPage(ctx) == VALUE[i],
 			"candPerPage shall be `%d'", VALUE[i]);
@@ -187,7 +173,7 @@ for (i = 0; i < ARRAY_SIZE(VALUE); ++i) {
 				</section>
 
 				<section>
-					<p>再加上前輩提供的 Stress Test Script</p>
+					<p>再加上前輩提供的 stress test script 找出 crash 的部分</p>
 					<pre><code data-trim contenteditable>
 commit 496cd753b7e6ce1e5c21fa574ce3e8d9cc07ed58
 Author: Kuang-che Wu &lt;kcwu@csie.org&gt;
@@ -197,10 +183,10 @@ Date:   Fri Jan 18 17:23:33 2013 +0800
 
 test/stresstest.py
 					</code></pre>
+					<p></p>
 				</section>
 
 				<section>
-					<h2>Coverage Report</h2>
 					<p><a href="https://drone.io/github.com/chewing/libchewing/files">https://drone.io/github.com/chewing/libchewing/files</a></p>
 					<img src="data/coverage.png">
 				</section>
@@ -238,13 +224,18 @@ chcp 65001
 
 				<section>
 					<p>在 Windows 上，應該要試試看 Visual Studio，不過又不想把 Visual Studio 的 project files 放到 git 上</p>
+				</section>
+
+				<section>
 					<p>那試試看用 CMake 好了</p>
 				</section>
 
 				<section>
 					<p>不過我不會 CMake，先抓個 <a href="http://www.cmake.org/cmake/help/cmake_tutorial.html">tutorial</a> 來看看吧</p>
+				</section>
+
+				<section>
 					<p>看起來只要把 build process 依照 CMake 的方式寫出來就好</p>
-					<p>先試試看在 Linux 上用 CMake build</p>
 				</section>
 
 				<section>
@@ -264,7 +255,11 @@ chcp 65001
 
 				<section>
 					<p>那試試看在 Windows 上用 Visual Studio Express 2012</p>
-					<p>當然需要再修改一些東西</p>
+				</section>
+
+				<section>
+					<p>build fail</p>
+					<p>要把 source 中 Visual Studio 不 support 的部份改掉</p>
 				</section>
 
 				<section>
