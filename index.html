@@ -245,6 +245,7 @@ chcp 65001
 
 				<section>
 					<p>依照 <a href="http://www.cmake.org/cmake/help/documentation.html">CMake manual</a> 上的說明把對應的 command 找出來</p>
+					<img src="data/build_cmake.png">
 				</section>
 
 				<section>
@@ -258,7 +259,7 @@ chcp 65001
 				</section>
 
 				<section>
-					<p>build fail</p>
+					<h2>Fail</h2>
 					<p>要把 source 中 Visual Studio 不 support 的部份改掉</p>
 				</section>
 
@@ -280,12 +281,21 @@ set_target_properties(${ALL_TOOLS} PROPERTIES
 				<section>
 					<p>把 UTF-8 string 改成 \xAA 的形式</p>
 					<p><a href="http://www.nubaria.com/en/blog/?p=289">Using UTF-8 as the internal representation for strings in C and C++ with Visual Studio</a></p>
+					<pre><code data-trim contenteditable>
+"好萊塢" → "\xE5\xA5\xBD\xE8\x90\x8A\xE5\xA1\xA2" /* 好萊塢 */
+					</code></pre>
 				</section>
 
 				<section>
 					<p>拿掉 designated initializer</p>
 					<p><a href="http://social.msdn.microsoft.com/Forums/en-US/vclanguage/thread/363d81f6-2308-492d-b530-2614b333e9e0/#aeece11a-ce75-434a-b140-cb54356d904e">C99 Designated Initializers support</a></p>
 					<img src="data/visual_studio_designated_initializer.png">
+					<pre><code data-trim contenteditable>
+static const ChewingConfigData DEFAULT_CONFIG = {
+    .candPerPage = MAX_SELKEY,
+    .selKey = { '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' },
+};
+				</code></pre>
 				</section>
 
 				<section>
@@ -300,6 +310,10 @@ cmake PATH -G "Visual Studio 11 Win64"
 					<p>Unit Test 也可以用</p>
 					<img src="data/Visual_Studio_Testing.png">
 				</section>
+
+				<secion>
+					<h2>CI Service</h2>
+				</secion>
 
 				<section>
 					<h2>travis-ci</h2>
@@ -353,19 +367,6 @@ libchewing-*.tar.gz
 					<h2>Launchpad</h2>
 					<p><a href="https://launchpad.net/~chewing/+archive/chewing">https://launchpad.net/~chewing/+archive/chewing</a></p>
 					<img src="data/launchpad.net.png">
-				</section>
-
-				<section>
-					<h2>Stress Test Script</h2>
-					<pre><code data-trim contenteditable>
-commit 496cd753b7e6ce1e5c21fa574ce3e8d9cc07ed58
-Author: Kuang-che Wu &lt;kcwu@csie.org&gt;
-Date:   Fri Jan 18 17:23:33 2013 +0800
-
-	Add script to run stress test
-
-test/stresstest.py
-					</code></pre>
 				</section>
 
 				<section>
