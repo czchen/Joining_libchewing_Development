@@ -239,7 +239,7 @@ chcp 65001
 				</section>
 
 				<section>
-					<p>以下是 libchewing build process</p>
+					<p>libchewing build process</p>
 					<img src="data/build.png">
 				</section>
 
@@ -313,61 +313,96 @@ cmake PATH -G "Visual Studio 11 Win64"
 
 				<section>
 					<p>接下來試試看 windows-chewing</p>
-					<p></p>
 				</section>
 
 				<section>
-					<a href="http://msdn.microsoft.com/en-us/library/windows/desktop/ms629032(v=vs.85).aspx">Text Services Framework</a>
+					<p>不會 build</p>
+					<p>所以 ... pull request welcome</p>
+				</section>
+
+				<section>
+					<p>不過 Windows 還是要試試看</p>
+					<p>所以先用 <a href="http://msdn.microsoft.com/en-us/library/windows/desktop/ms629032(v=vs.85).aspx">Text Services Framework</a> 寫個 POC 出來</p>
+				</section>
+
+				<section>
 					<p>有 sample code，應該改一下就可以用了</p>
 					<img src="data/TSF-sample.png">
 				</section>
 
 				<section>
-					<p>不過第二個 sample 就看不懂了</p>
-					<p>不過，強者我同事曾說 "MSDN 最重要的是其他人的註解"</p>
+					<p>不過</p>
+					<p>第二個 sample 就看不懂了</p>
 				</section>
 
 				<section>
-					<p>順序好像怪怪的</p>
+					<p>強者我同事曾說 "MSDN 最重要的是其他人的註解"</p>
+				</section>
+
+				<section>
+					<p>好像哪裡怪怪的</p>
 					<img src="data/TSF-sample-comment.png">
 				</section>
 
 				<section>
-					<img src="data/TSF-sample.png">
-					<img src="data/TSF-sample-comment.png">
+					<p>連連看時間</p>
+					<img src="data/TSF-sample-comparison.png">
 				</section>
 
 				<section>
-					<p>POC 在 <a href="https://github.com/czchen/TSF-chewing">TSF-chewing</a></p>
+					<p>POC 在 <a href="https://github.com/czchen/TSF-chewing">https://github.com/czchen/TSF-chewing</a></p>
 					<img src="data/TSF-chewing.png">
 				</section>
 
 				<section>
-					<h2>CI Service</h2>
+					<h2>CI Services</h2>
 				</section>
 
 				<section>
-					<h2>travis-ci</h2>
+					<p>原因？</p>
+					<ul>
+						<li>寫完 Unit Test 後懶得自己跑</li>
+						<li>寫完 Coverage Report 後懶得自己跑</li>
+						<li>懶得包 ubuntu package</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Travis CI</h2>
 					<a href="https://travis-ci.org/chewing/libchewing">https://travis-ci.org/chewing/libchewing</a>
+					<img src="data/travis-ci.png">
 				</section>
 
 				<section>
-					<p>只要把 .travis.yml 加 到 project 內就可以用了</p>
+					<p>只要把 <a href="https://github.com/chewing/libchewing/blob/master/.travis.yml">.travis.yml</a> 加 到 project 內就可以用了</p>
 				</section>
 
 				<section>
-					<p>travis-ci 會 build 下列幾種組合</p>
+					<p>有下列幾種組合</p>
 					<ul>
 						<li>gcc + autotools</li>
 						<li>clang + autotools + disable-binary-data</li>
 						<li>gcc + cmake + valgrind</li>
 						<li>clang + cmake + address sanitizer</li>
+						<li>gcc + cmake + coverage report</li>
 					</ul>
+				</section>
+
+				<section>
+					<h2>COVERALLS</h2>
+					<a href="https://coveralls.io/r/chewing/libchewing">https://coveralls.io/r/chewing/libchewing</a>
+					<img src="data/coveralls.io.png">
+				</section>
+
+				<section>
+					<p>在 Travis CI 跑完後跑一下 coveralls 就好了</p>
+					<a href="https://coveralls.io/docs/cpp">https://coveralls.io/docs/cpp</a>
 				</section>
 
 				<section>
 					<h2>drone.io</h2>
 					<a href="https://drone.io/github.com/chewing/libchewing">https://drone.io/github.com/chewing/libchewing</a>
+					<img src="data/drone.io.png">
 				</section>
 
 				<section>
