@@ -63,7 +63,7 @@
 				</section>
 
 				<section>
-					<h2>Send pull request</h2>
+					<p>Send pull request</p>
 					<img src="data/pull_14.png" alt="pull request 14">
 				</section>
 
@@ -81,7 +81,7 @@
 				</section>
 
 				<section>
-					<h2>Fixed</h2>
+					<p>Fixed</p>
 					<img src="data/issue_26_fix.png">
 				</section>
 
@@ -173,7 +173,13 @@ for (i = 0; i &lt; ARRAY_SIZE(VALUE); ++i) {
 				</section>
 
 				<section>
-					<p>再加上前輩提供的 stress test script 找出 crash 的部分</p>
+					<p>看起來好多了</p>
+					<p><a href="https://drone.io/github.com/chewing/libchewing/files">https://drone.io/github.com/chewing/libchewing/files</a></p>
+					<img src="data/coverage.png">
+				</section>
+
+				<section>
+					<p>跑 kcwu 提供的 stress test script 找出問題</p>
 					<pre><code data-trim contenteditable>
 commit 496cd753b7e6ce1e5c21fa574ce3e8d9cc07ed58
 Author: Kuang-che Wu &lt;kcwu@csie.org&gt;
@@ -183,16 +189,191 @@ Date:   Fri Jan 18 17:23:33 2013 +0800
 
 test/stresstest.py
 					</code></pre>
-					<p></p>
 				</section>
 
 				<section>
-					<p><a href="https://drone.io/github.com/chewing/libchewing/files">https://drone.io/github.com/chewing/libchewing/files</a></p>
-					<img src="data/coverage.png">
+					<p>新增 CMake build system</p>
 				</section>
 
 				<section>
-					<p>接下來來試試在 Windows 上 build</p>
+					<p>用 <a href="http://valgrind.org/">valgrind</a> 跑所有的 test cases</p>
+					<pre><code data-trim contenteditable>
+if(USE_VALGRIND)
+	find_program(VALGRIND valgrind)
+	if(VALGRIND)
+		foreach(target ${ALL_TESTCASES})
+			...
+					</code></pre>
+				</section>
+
+				<section>
+					<p>用 <a href="https://code.google.com/p/address-sanitizer/">address sanitizer</a> 跑所有的 test cases</p>
+					<pre><code data-trim contenteditable>
+CFLAGS+=-fsanitize=address
+					</code></pre>
+				</section>
+
+				<section>
+					<p>新增 API</p>
+					<pre><code data-trim contenteditable>
+CHEWING_API void chewing_set_logger( ChewingContext *ctx,
+	void (*logger)( void *data, int level, const char *fmt, ... ),
+	void *data )
+					</code></pre>
+				</section>
+
+				<section>
+					<p>新增 API 要修改 version</p>
+					<p>問題是 autotools 和 CMake 是用不同的 version format</p>
+				</section>
+
+				<section>
+					<p>autotools 的 -version-info 是用 current / revision / age</p>
+					<pre><code data-trim contenteditable>
+libchewing_la_LDFLAGS = \
+	-version-info $(LIBCHEWING_CURRENT):$(LIBCHEWING_REVISION):$(LIBCHEWING_AGE) \
+	...
+					</code></pre>
+				</section>
+
+				<section>
+					<p>CMake 用 major / minor / revision</p>
+					<pre><code data-trim contenteditable>
+set_target_properties(${LIBS} PROPERTIES
+	OUTPUT_NAME chewing
+	SOVERSION 3
+	VERSION 3.1.0
+)
+					</code></pre>
+				</section>
+
+				<section>
+					<p>在 Linux 上，libchewing 的檔案名稱是 libchewing.so.major.minor.revision</p>
+					<pre><code data-trim contenteditable>
+major = current - age
+minor = age
+revision = revision
+					</code></pre>
+				</section>
+
+				<section>
+					<p>不過在 BSD 上，公式不太一樣</p>
+					<p><a href="https://lists.gnu.org/archive/html/bug-libtool/2011-05/msg00007.html">bug#8765: Incorrect library versioning on *BSDs</a></p>
+				</section>
+
+				<section>
+					<p>所以</p>
+					<pre><code data-trim contenteditable>
+commit 3b1805c27bbf408f29e46abc8e111993ce512b53
+Author: ChangZhuo Chen &lt;czchen@gmail.com&gt;
+Date:   Sat Jun 22 20:34:35 2013 +0800
+
+    Use -version-number in libtool
+					</code></pre>
+				</section>
+
+				<section>
+					<p>也有遇到 cross platform issue</p>
+					<p><a href="https://github.com/chewing/libchewing/issues/53">libchewing: FTBFS on sparc</a>
+				</section>
+
+				<section>
+					<h2>CI Services</h2>
+				</section>
+
+				<section>
+					<ul>
+						<li>懶得自己跑 Unit Test</li>
+						<li>懶得自己跑 Coverage Report</li>
+						<li>懶得包 debian package</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Travis CI</h2>
+					<p>Powered by kanru</p>
+					<p><a href="https://travis-ci.org/chewing/libchewing">https://travis-ci.org/chewing/libchewing</a></p>
+					<img src="data/travis-ci.png">
+				</section>
+
+				<section>
+					<p>只要把 <a href="https://github.com/chewing/libchewing/blob/master/.travis.yml">.travis.yml</a> 加到 project 內就可以用了</p>
+				</section>
+
+				<section>
+					<p>有下列幾種組合</p>
+					<ul>
+						<li>gcc + autotools</li>
+						<li>clang + autotools + disable-binary-data</li>
+						<li>gcc + cmake + valgrind</li>
+						<li>clang + cmake + address sanitizer</li>
+						<li>gcc + cmake + coverage report</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>COVERALLS</h2>
+					<a href="https://coveralls.io/r/chewing/libchewing">https://coveralls.io/r/chewing/libchewing</a>
+					<img src="data/coveralls.io.png">
+				</section>
+
+				<section>
+					<p>在 Travis CI 跑完後跑一下 coveralls 就好了</p>
+					<a href="https://coveralls.io/docs/cpp">https://coveralls.io/docs/cpp</a>
+				</section>
+
+				<section>
+					<h2>drone.io</h2>
+					<a href="https://drone.io/github.com/chewing/libchewing">https://drone.io/github.com/chewing/libchewing</a>
+					<img src="data/drone.io.png">
+				</section>
+
+				<section>
+					<p>設定 Commands</p>
+					<pre><code data-trim contenteditable>
+sudo apt-get install -qq lcov texinfo
+./autogen.sh
+./configure --enable-gcov
+make dist
+make check
+scripts/lcov.sh
+tar czf coveragereport.tar.gz coveragereport
+					</code></pre>
+					<p>設定 Artifacts</p>
+					<pre><code data-trim contenteditable>
+coveragereport.tar.gz
+libchewing-*.tar.gz
+					</code></pre>
+				</section>
+
+				<section>
+					<p>就可以產生 package 和 coverage report</p>
+					<a href="https://drone.io/github.com/chewing/libchewing/files">https://drone.io/github.com/chewing/libchewing/files</a>
+					<img src="data/drone.io.download.png">
+				</section>
+
+				<section>
+					<h2>Launchpad</h2>
+					<p>Powered by Shawn</p>
+					<p><a href="https://launchpad.net/~chewing/+archive/chewing">https://launchpad.net/~chewing/+archive/chewing</a></p>
+					<img src="data/launchpad.net.png">
+				</section>
+
+				<section>
+					<p>要在 Launchpad 上作 daily-build，需要以下步驟</p>
+					<ul>
+						<li>Import github project to launchpad</li>
+						<li>在 launchpad 上開一個 debianize repository</li>
+						<li>寫 recipe</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>字詞庫整理</h2>
+				</section>
+
+				<section>
+					<h2>Windows</h2>
 				</section>
 
 				<section>
@@ -295,7 +476,7 @@ static const ChewingConfigData DEFAULT_CONFIG = {
     .candPerPage = MAX_SELKEY,
     .selKey = { '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' },
 };
-				</code></pre>
+					</code></pre>
 				</section>
 
 				<section>
@@ -352,87 +533,6 @@ cmake PATH -G "Visual Studio 11 Win64"
 				<section>
 					<p>POC 在 <a href="https://github.com/czchen/TSF-chewing">https://github.com/czchen/TSF-chewing</a></p>
 					<img src="data/TSF-chewing.png">
-				</section>
-
-				<section>
-					<h2>CI Services</h2>
-				</section>
-
-				<section>
-					<p>原因？</p>
-					<ul>
-						<li>寫完 Unit Test 後懶得自己跑</li>
-						<li>寫完 Coverage Report 後懶得自己跑</li>
-						<li>懶得包 ubuntu package</li>
-					</ul>
-				</section>
-
-				<section>
-					<h2>Travis CI</h2>
-					<a href="https://travis-ci.org/chewing/libchewing">https://travis-ci.org/chewing/libchewing</a>
-					<img src="data/travis-ci.png">
-				</section>
-
-				<section>
-					<p>只要把 <a href="https://github.com/chewing/libchewing/blob/master/.travis.yml">.travis.yml</a> 加 到 project 內就可以用了</p>
-				</section>
-
-				<section>
-					<p>有下列幾種組合</p>
-					<ul>
-						<li>gcc + autotools</li>
-						<li>clang + autotools + disable-binary-data</li>
-						<li>gcc + cmake + valgrind</li>
-						<li>clang + cmake + address sanitizer</li>
-						<li>gcc + cmake + coverage report</li>
-					</ul>
-				</section>
-
-				<section>
-					<h2>COVERALLS</h2>
-					<a href="https://coveralls.io/r/chewing/libchewing">https://coveralls.io/r/chewing/libchewing</a>
-					<img src="data/coveralls.io.png">
-				</section>
-
-				<section>
-					<p>在 Travis CI 跑完後跑一下 coveralls 就好了</p>
-					<a href="https://coveralls.io/docs/cpp">https://coveralls.io/docs/cpp</a>
-				</section>
-
-				<section>
-					<h2>drone.io</h2>
-					<a href="https://drone.io/github.com/chewing/libchewing">https://drone.io/github.com/chewing/libchewing</a>
-					<img src="data/drone.io.png">
-				</section>
-
-				<section>
-					<p>設定 Commands</p>
-					<pre><code data-trim contenteditable>
-sudo apt-get install -qq lcov texinfo
-./autogen.sh
-./configure --enable-gcov
-make dist
-make check
-scripts/lcov.sh
-tar czf coveragereport.tar.gz coveragereport
-					</code></pre>
-					<p>設定 Artifacts</p>
-					<pre><code data-trim contenteditable>
-coveragereport.tar.gz
-libchewing-*.tar.gz
-					</code></pre>
-				</section>
-
-				<section>
-					<p>就可以產生 package 和 coverage report</p>
-					<a href="https://drone.io/github.com/chewing/libchewing/files">https://drone.io/github.com/chewing/libchewing/files</a>
-					<img src="data/drone.io.download.png">
-				</section>
-
-				<section>
-					<h2>Launchpad</h2>
-					<p><a href="https://launchpad.net/~chewing/+archive/chewing">https://launchpad.net/~chewing/+archive/chewing</a></p>
-					<img src="data/launchpad.net.png">
 				</section>
 
 				<section>
