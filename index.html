@@ -239,6 +239,7 @@ chcp 65001
 
 				<section>
 					<p>不過我不會 CMake，先抓個 <a href="http://www.cmake.org/cmake/help/cmake_tutorial.html">tutorial</a> 來看看吧</p>
+					<p><img src="data/cmake_tutorial.png"></p>
 				</section>
 
 				<section>
@@ -360,7 +361,7 @@ CHEWING_API void chewing_set_logger( ChewingContext *ctx,
 
 				<section>
 					<p>新增 API 要修改 library version</p>
-					<p>問題是 autotools 和 CMake 是用不同的 format</p>
+					<p>可是 autotools 和 CMake 是用不同的 format</p>
 				</section>
 
 				<section>
@@ -420,7 +421,7 @@ Date:   Sat Jun 22 20:34:35 2013 +0800
 				</section>
 
 				<section>
-					<p>不過只 patch 到 Makefile.am，Makefile 本身忘了 patch ...</p>
+					<p>不過只 patch 到 Makefile.am，Makefile 本身忘了 patch</p>
 					<p><a href="http://bugs.debian.org/712883">debian #712883</a></p>
 				</section>
 
@@ -445,7 +446,7 @@ Date:   Sat Jun 22 20:34:35 2013 +0800
 				</section>
 
 				<section>
-					<h2>Travis CI</h2>
+					<h3>Travis CI</h3>
 					<p>Powered by kanru</p>
 					<p><a href="https://travis-ci.org/chewing/libchewing">https://travis-ci.org/chewing/libchewing</a></p>
 					<img src="data/travis-ci.png">
@@ -467,7 +468,7 @@ Date:   Sat Jun 22 20:34:35 2013 +0800
 				</section>
 
 				<section>
-					<h2>COVERALLS</h2>
+					<h3>COVERALLS</h3>
 					<a href="https://coveralls.io/r/chewing/libchewing">https://coveralls.io/r/chewing/libchewing</a>
 					<img src="data/coveralls.io.png">
 				</section>
@@ -478,7 +479,7 @@ Date:   Sat Jun 22 20:34:35 2013 +0800
 				</section>
 
 				<section>
-					<h2>drone.io</h2>
+					<h3>drone.io</h3>
 					<a href="https://drone.io/github.com/chewing/libchewing">https://drone.io/github.com/chewing/libchewing</a>
 					<img src="data/drone.io.png">
 				</section>
@@ -508,14 +509,14 @@ libchewing-*.tar.gz
 				</section>
 
 				<section>
-					<h2>Launchpad daily-build PPA</h2>
+					<h3>Launchpad daily-build PPA</h3>
 					<p>Powered by Shawn</p>
 					<p><a href="https://launchpad.net/~chewing/+archive/chewing">https://launchpad.net/~chewing/+archive/chewing</a></p>
 					<img src="data/launchpad.net.png">
 				</section>
 
 				<section>
-					<p>要在 Launchpad 上作 daily-build，需要以下步驟</p>
+					<p>只要以下步驟就可以作 Launchpad daily-build PPA</p>
 					<ul>
 						<li>Import github project to launchpad</li>
 						<li>在 launchpad 上開一個 debianize repository</li>
@@ -533,12 +534,12 @@ nest-part packaging lp:~chewing/libchewing/debianize debian debian
 				</section>
 
 				<section>
-					<p>順便把 PPA 接上 Apport</p>
+					<p>ubuntu 可以把 PPA 接到 <a href="https://wiki.ubuntu.com/Apport">Apport</a> 上</p>
 					<p><a href="http://jderose.blogspot.tw/2012/09/how-to-use-apport-in-your-daily-ppa.html">How to use Apport in your daily PPA builds</a></p>
 				</section>
 
 				<section>
-					<p>只要把下面的 code 放到 /usr/share/apport/package-hooks/ibus_chewing.py</p>
+					<p>基本上把下面的 code 放到 /usr/share/apport/package-hooks/&lt;pacage-name&gt;.py 就好了</p>
 					<pre><code data-trim contenteditable>
 def add_info(report):
     report['CrashDB'] = '{"impl": "launchpad", "project": "libchewing"}'
@@ -546,8 +547,14 @@ def add_info(report):
 				</section>
 
 				<section>
-					<p>就可以直接產生 bug report 到 Launchpad 上</p>
+					<p>不過 ubuntu 會用執行檔來找有問題的 package</p>
+					<p>所以 package-name 要設成 ibus-chewing ... 等，而不是 libchewing</p>
+				</section>
+
+				<section>
+					<p>這樣就可以直接產生 bug report 到 Launchpad 上</p>
 					<p><a href="https://bugs.launchpad.net/libchewing/+bug/1197795">bug report example </a></p>
+					<p><img src="data/launchpad.net_bug_report.png"></p>
 				</section>
 
 				<section>
@@ -555,7 +562,27 @@ def add_info(report):
 				</section>
 
 				<section>
-					<p>50101fe213efaad10cb09beef9693e0ec63ee391</p>
+					<p>ㄍㄢˇ ㄗㄡˇ → 趕人</p>
+					<p><a href="https://groups.google.com/forum/#!topic/chewing-devel/tzNOjgYyzdQ">Google Group Chewing IM Development</a></p>
+					<p><img src="data/data_problem.png"></p>
+				</section>
+
+				<section>
+					<ul>
+						<li>sort_word → 建立字庫</li>
+						<li>sort_dic → 建立詞庫</li>
+					</ul>
+				</section>
+
+				<section>
+					<p>砍掉重練</p>
+					<pre><code data-trim contenteditable>
+commit 704c1eb48706abd8c458149fabb46924c5e309fc
+Author: ChangZhuo Chen &lt;czchen@gmail.com&gt;
+Date:   Sun Dec 30 03:10:12 2012 +0800
+
+    Add sort to replace sort_word and sort_dic
+					</code></pre>
 				</section>
 
 				<section>
@@ -578,7 +605,7 @@ def add_info(report):
 
 				<section>
 					<p>有 sample code，應該改一下就可以用了</p>
-					<img src="data/TSF-sample.png">
+					<p><img src="data/TSF-sample.png"></p>
 				</section>
 
 				<section>
@@ -591,23 +618,23 @@ def add_info(report):
 
 				<section>
 					<p>好像哪裡怪怪的</p>
-					<img src="data/TSF-sample-comment.png">
+					<p><img src="data/TSF-sample-comment.png"></p>
 				</section>
 
 				<section>
 					<p>連連看時間</p>
-					<img src="data/TSF-sample-comparison.png">
+					<p><img src="data/TSF-sample-comparison.png"></p>
 				</section>
 
 				<section>
 					<p>POC 在 <a href="https://github.com/czchen/TSF-chewing">https://github.com/czchen/TSF-chewing</a></p>
-					<img src="data/TSF-chewing.png">
+					<p><img src="data/TSF-chewing.png"></p>
 				</section>
 
 				<section>
 					<h1>We are hiring</h1>
 					<p>Send a pull request to <a href="https://github.com/chewing/libchewing](https://github.com/chewing/libchewing">https://github.com/chewing/libchewing</a>
-					<img src="data/we_are_hiring.png">
+					<p><img src="data/we_are_hiring.png"></p>
 				</section>
 			</div>
 
