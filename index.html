@@ -38,7 +38,7 @@
 			<div class="slides">
 				<section>
 					<h1>Joining libchewing Development</h1>
-					<p>ChangZhuo Chen (<a href="https://github.com/czchen">https://github.com/czchen</a>)</p>
+					<p>ChangZhuo Chen (<a href="mailto:czchen@gmail.com">czchen@gmail.com</a>)</p>
 					<p><a href="http://coscup.org/2013/zh-tw/">COSCUP 2013</a></p>
 				</section>
 
@@ -49,13 +49,18 @@
 
 				<section>
 					<h2>先廣告一下</h2>
-					<p></p>
-					<p>libchewing 0.3.5 已經 release 了，ubuntu 使用者可以用 <a href="https://launchpad.net/~chewing/+archive/chewing">chewing daily build ppa</a>安裝</p>
+					<ul>
+						<li>有新的 release <a href="http://chewing.im/post-2013-07-28_libchewing-0_3_5.html">0.3.5</a></li>
+						<li>有新的 domain (<a href="http://chewing.im/">http://chewing.im/</a>)</li>
+						<li>有新的 <a href="https://github.com/chewing/libchewing/issues">bugs</a></li>
+						<li>需要新的 contributors</li>
+					</ul>
+					<!--a href="https://launchpad.net/~chewing/+archive/chewing">chewing daily build ppa</a>安裝</p>
 					<pre><code data-trim contenteditable>
 sudo add-apt-repository ppa:chewing/chewing
 sudo apt-get update
 sudo apt-get upgrade
-					</code></pre>
+					</code></pre-->
 				</section>
 
 				<section>
@@ -346,7 +351,7 @@ if(USE_VALGRIND)
 				<section>
 					<p>用 <a href="https://code.google.com/p/address-sanitizer/">address sanitizer</a> 跑所有的 test cases</p>
 					<pre><code data-trim contenteditable>
-CFLAGS+=-fsanitize=address
+CC=clang CFLAGS+=-fsanitize=address
 					</code></pre>
 				</section>
 
@@ -418,11 +423,13 @@ Date:   Sat Jun 22 20:34:35 2013 +0800
 				<section>
 					<p>修好後順便送了 patch 到 debian</p>
 					<p><a href="http://bugs.debian.org/709934">debian #709934</a></p>
+					<p><img src="data/debian_709934.png"></p>
 				</section>
 
 				<section>
 					<p>不過只 patch 到 Makefile.am，Makefile 本身忘了 patch</p>
 					<p><a href="http://bugs.debian.org/712883">debian #712883</a></p>
+					<p><img src="data/debian_712883.png"></p>
 				</section>
 
 				<section>
