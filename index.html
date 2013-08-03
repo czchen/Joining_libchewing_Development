@@ -80,17 +80,17 @@
 
 				<section>
 					<p>Send pull request</p>
-					<img src="data/pull_14.png" alt="pull request 14">
+					<img src="images/gpull_14.png" alt="pull request 14">
 				</section>
 
 				<section>
 					<p>感覺 Unit Test 有點少，會不會改出問題阿？</p>
-					<img src="data/old_test.png">
+					<img src="images/gold_test.png">
 				</section>
 
 				<section>
 					<a href="https://github.com/chewing/libchewing/issues/26">https://github.com/chewing/libchewing/issues/26</a>
-					<img src="data/issue_26.png">
+					<img src="images/gissue_26.png">
 				</section>
 
 				<section>
@@ -99,7 +99,7 @@
 
 				<section>
 					<p>Fixed</p>
-					<img src="data/issue_26_fix.png">
+					<img src="images/gissue_26_fix.png">
 				</section>
 
 				<section>
@@ -128,7 +128,7 @@ AS_IF([test x$ENABLE_GCOV = x"true"],
 
 				<section>
 					<p><a href="http://kanru.info/chewing/lcov-check/">http://kanru.info/chewing/lcov-check/</a></p>
-					<img src="data/initial_coverage.png">
+					<img src="images/ginitial_coverage.png">
 				</section>
 
 				<section>
@@ -202,7 +202,7 @@ for (i = 0; i &lt; ARRAY_SIZE(VALUE); ++i) {
 				<section>
 					<p>看起來好多了</p>
 					<p><a href="https://drone.io/github.com/chewing/libchewing/files">https://drone.io/github.com/chewing/libchewing/files</a></p>
-					<img src="data/coverage.png">
+					<img src="images/gcoverage.png">
 				</section>
 
 				<section>
@@ -246,7 +246,7 @@ chcp 65001
 
 				<section>
 					<p>不過我不會 CMake，先抓個 <a href="http://www.cmake.org/cmake/help/cmake_tutorial.html">tutorial</a> 來看看吧</p>
-					<p><img src="data/cmake_tutorial.png"></p>
+					<p><img src="images/gcmake_tutorial.png"></p>
 				</section>
 
 				<section>
@@ -255,12 +255,12 @@ chcp 65001
 
 				<section>
 					<p>libchewing build process</p>
-					<img src="data/build.png">
+					<img src="images/gbuild.png">
 				</section>
 
 				<section>
 					<p>依照 <a href="http://www.cmake.org/cmake/help/documentation.html">CMake manual</a> 上的說明把對應的 command 找出來</p>
-					<img src="data/build_cmake.png">
+					<img src="images/gbuild_cmake.png">
 				</section>
 
 				<section>
@@ -304,7 +304,7 @@ set_target_properties(${ALL_TOOLS} PROPERTIES
 				<section>
 					<p>拿掉 designated initializer</p>
 					<p><a href="http://social.msdn.microsoft.com/Forums/en-US/vclanguage/thread/363d81f6-2308-492d-b530-2614b333e9e0/#aeece11a-ce75-434a-b140-cb54356d904e">C99 Designated Initializers support</a></p>
-					<img src="data/visual_studio_designated_initializer.png">
+					<img src="images/gvisual_studio_designated_initializer.png">
 					<pre><code data-trim contenteditable>
 static const ChewingConfigData DEFAULT_CONFIG = {
     .candPerPage = MAX_SELKEY,
@@ -318,12 +318,12 @@ static const ChewingConfigData DEFAULT_CONFIG = {
 					<pre><code data-trim contenteditable>
 cmake PATH -G "Visual Studio 11 Win64"
 					</code></pre>
-					<img src="data/Visual_Studio_Solution.png">
+					<img src="images/gVisual_Studio_Solution.png">
 				</section>
 
 				<section>
 					<p>unit test 也可以用</p>
-					<img src="data/Visual_Studio_Testing.png">
+					<img src="images/gVisual_Studio_Testing.png">
 				</section>
 
 				<section>
@@ -358,6 +358,11 @@ CC=clang CFLAGS+=-fsanitize=address
 				</section>
 
 				<section>
+					<p>用 <a href="https://code.google.com/p/include-what-you-use/">include-what-you-use</a> 清 include</p>
+					<p><img src="images/ginclude-what-you-use.png"></p>
+				</section>
+
+				<section>
 					<p>新增 API</p>
 					<pre><code data-trim contenteditable>
 CHEWING_API void chewing_set_logger( ChewingContext *ctx,
@@ -373,11 +378,6 @@ CHEWING_API void chewing_set_logger( ChewingContext *ctx,
 
 				<section>
 					<p>autotools 的 -version-info 是用 current / revision / age</p>
-					<pre><code data-trim contenteditable>
-libchewing_la_LDFLAGS = \
-	-version-info $(LIBCHEWING_CURRENT):$(LIBCHEWING_REVISION):$(LIBCHEWING_AGE) \
-	...
-					</code></pre>
 				</section>
 
 				<section>
@@ -403,10 +403,13 @@ revision = revision
 				<section>
 					<p>不過在 BSD 上，公式不太一樣</p>
 					<p><a href="https://lists.gnu.org/archive/html/bug-libtool/2011-05/msg00007.html">bug#8765: Incorrect library versioning on *BSDs</a></p>
+					<pre><code data-trim contenteditable>
+major = current
+					</code></pre>
 				</section>
 
 				<section>
-					<p>所以</p>
+					<p>所以 ...</p>
 					<pre><code data-trim contenteditable>
 commit 3b1805c27bbf408f29e46abc8e111993ce512b53
 Author: ChangZhuo Chen &lt;czchen@gmail.com&gt;
@@ -425,13 +428,13 @@ Date:   Sat Jun 22 20:34:35 2013 +0800
 				<section>
 					<p>修好後順便送了 patch 到 debian</p>
 					<p><a href="http://bugs.debian.org/709934">debian #709934</a></p>
-					<p><img src="data/debian_709934.png"></p>
+					<p><img src="images/gdebian_709934.png"></p>
 				</section>
 
 				<section>
 					<p>不過只 patch 到 Makefile.am，Makefile 本身忘了 patch</p>
 					<p><a href="http://bugs.debian.org/712883">debian #712883</a></p>
-					<p><img src="data/debian_712883.png"></p>
+					<p><img src="images/gdebian_712883.png"></p>
 				</section>
 
 				<section>
@@ -440,7 +443,7 @@ Date:   Sat Jun 22 20:34:35 2013 +0800
 
 				<section>
 					<p><a href="http://lists.gnu.org/archive/html/libtool/2009-03/msg00026.html">-no-undefined support for GNU/Linux</a><p>
-					<p><img src="data/no_undefined.png"></p>
+					<p><img src="images/gno_undefined.png"></p>
 				</section>
 
 				<section>
@@ -459,11 +462,32 @@ Date:   Sat Jun 22 20:34:35 2013 +0800
 					<h3>Travis CI</h3>
 					<p>Powered by kanru</p>
 					<p><a href="https://travis-ci.org/chewing/libchewing">https://travis-ci.org/chewing/libchewing</a></p>
-					<img src="data/travis-ci.png">
+					<img src="images/gtravis-ci.png">
 				</section>
 
 				<section>
 					<p>只要把 <a href="https://github.com/chewing/libchewing/blob/master/.travis.yml">.travis.yml</a> 加到 project 內就可以用了</p>
+				</section>
+
+				<section>
+					<p>build matrix</p>
+					<pre><code data-trim contenteditable>
+language: c
+
+compiler: gcc
+env: BUILD=autotools
+
+matrix:
+  include:
+    - compiler: clang
+      env: BUILD=autotools CONFIGURE_OPTION=--disable-binary-data
+    - compiler: gcc
+      env: BUILD=cmake
+    - compiler: clang
+      env: BUILD=cmake CMAKE_OPTION="-DUSE_VALGRIND=no -DNO_UNDEFINED=no" CFLAGS=-fsanitize=address
+    - compiler: gcc
+      env: BUILD=cmake CMAKE_OPTION="-DENABLE_GCOV=yes -DUSE_VALGRIND=no" COVERALLS=yes
+					</code></pre>
 				</section>
 
 				<section>
@@ -480,7 +504,7 @@ Date:   Sat Jun 22 20:34:35 2013 +0800
 				<section>
 					<h3>COVERALLS</h3>
 					<a href="https://coveralls.io/r/chewing/libchewing">https://coveralls.io/r/chewing/libchewing</a>
-					<img src="data/coveralls.io.png">
+					<img src="images/gcoveralls.io.png">
 				</section>
 
 				<section>
@@ -495,7 +519,7 @@ after_success:
 				<section>
 					<h3>drone.io</h3>
 					<a href="https://drone.io/github.com/chewing/libchewing">https://drone.io/github.com/chewing/libchewing</a>
-					<img src="data/drone.io.png">
+					<img src="images/gdrone.io.png">
 				</section>
 
 				<section>
@@ -519,20 +543,20 @@ libchewing-*.tar.gz
 				<section>
 					<p>就可以產生 package 和 coverage report</p>
 					<a href="https://drone.io/github.com/chewing/libchewing/files">https://drone.io/github.com/chewing/libchewing/files</a>
-					<img src="data/drone.io.download.png">
+					<img src="images/gdrone.io.download.png">
 				</section>
 
 				<section>
 					<h3>Launchpad daily-build PPA</h3>
 					<p>Powered by Shawn</p>
 					<p><a href="https://launchpad.net/~chewing/+archive/chewing">https://launchpad.net/~chewing/+archive/chewing</a></p>
-					<img src="data/launchpad.net.png">
+					<img src="images/glaunchpad.net.png">
 				</section>
 
 				<section>
 					<p>只要以下步驟就可以作 Launchpad daily-build PPA</p>
 					<ul>
-						<li>Import github project to launchpad</li>
+						<li>Import github project to launchpad (with git protocol)</li>
 						<li>在 launchpad 上開一個 debianize repository</li>
 						<li>寫 recipe</li>
 					</ul>
@@ -567,7 +591,7 @@ def add_info(report):
 				<section>
 					<p>這樣就可以直接產生 bug report 到 Launchpad 上</p>
 					<p><a href="https://bugs.launchpad.net/libchewing/+bug/1197795">bug report example </a></p>
-					<p><img src="data/launchpad.net_bug_report.png"></p>
+					<p><img src="images/glaunchpad.net_bug_report.png"></p>
 				</section>
 
 				<section>
@@ -577,24 +601,76 @@ def add_info(report):
 				<section>
 					<p>ㄍㄢˇ ㄗㄡˇ → 趕人</p>
 					<p><a href="https://groups.google.com/forum/#!topic/chewing-devel/tzNOjgYyzdQ">Google Group Chewing IM Development</a></p>
-					<p><img src="data/data_problem.png"></p>
+					<p><img src="images/gdata_problem.png"></p>
 				</section>
 
 				<section>
+					<p>raw data 不乾淨？看來要清一下</p>
+				</section>
+
+				<section>
+					<p>raw data</p>
 					<ul>
-						<li>sort_word → 建立字庫</li>
-						<li>sort_dic → 建立詞庫</li>
+						<li>phone.cin + sort_word → 字庫</li>
+						<li>tsi.src + sort_dic → 詞庫</li>
 					</ul>
 				</section>
 
 				<section>
-					<p>砍掉重練</p>
+					<p>改 sort_word 和 sort_dic 來檢查字詞庫的正確性</p>
+				</section>
+
+				<section>
+					<p>要檢查的部份如下</p>
+					<ul>
+						<li>字/詞 重複</li>
+						<li>同音詞有相同的 frequency</li>
+						<li>format 錯誤</li>
+						<li>注音符號錯誤</li>
+						<li>詞庫長度錯誤</li>
+						<li>詞庫發音錯誤</li>
+					</ul>
+				</section>
+
+				<section>
+					<p>用 sort 取代 sort_word  和 sort_dic</p>
 					<pre><code data-trim contenteditable>
 commit 704c1eb48706abd8c458149fabb46924c5e309fc
 Author: ChangZhuo Chen &lt;czchen@gmail.com&gt;
 Date:   Sun Dec 30 03:10:12 2012 +0800
 
     Add sort to replace sort_word and sort_dic
+					</code></pre>
+				</section>
+
+				<section>
+					<p>接下來開始清 raw data</p>
+					<ul>
+						<li>中文發音特例</li>
+						<li>同音詞有相同的 frequency</li>
+					</ul>
+				</section>
+
+				<section>
+					<p>中文發音特例</p>
+					<ul>
+						<li><a href="https://www.moedict.tw/#好萊塢">好萊塢</a> vs <a href="https://www.moedict.tw/#塢">塢</a></li>
+						<li>疊字第二字轉輕聲</li>
+					</ul>
+				</section>
+
+				<section>
+					<p>同音詞有相同的 frequency ...</p>
+				</section>
+
+				<section>
+					<p>就 ... 裝作沒看見</p>
+					<pre><code data-trim contenteditable>
+if (a->freq == b->freq) {
+	/* FIXME: shall exit(-1) when tsi.src is fixed */
+	//fprintf(stderr, "Phrase `%s' and `%s' have the same phone and frequency (%d).\n", a->phrase, b->phrase, a->freq);
+	//exit(-1);
+}
 					</code></pre>
 				</section>
 
@@ -618,7 +694,7 @@ Date:   Sun Dec 30 03:10:12 2012 +0800
 
 				<section>
 					<p>有 sample code，應該改一下就可以用了</p>
-					<p><img src="data/TSF-sample.png"></p>
+					<p><img src="images/gTSF-sample.png"></p>
 				</section>
 
 				<section>
@@ -631,23 +707,23 @@ Date:   Sun Dec 30 03:10:12 2012 +0800
 
 				<section>
 					<p>好像哪裡怪怪的</p>
-					<p><img src="data/TSF-sample-comment.png"></p>
+					<p><img src="images/gTSF-sample-comment.png"></p>
 				</section>
 
 				<section>
 					<p>連連看時間</p>
-					<p><img src="data/TSF-sample-comparison.png"></p>
+					<p><img src="images/gTSF-sample-comparison.png"></p>
 				</section>
 
 				<section>
 					<p>POC 在 <a href="https://github.com/czchen/TSF-chewing">https://github.com/czchen/TSF-chewing</a></p>
-					<p><img src="data/TSF-chewing.png"></p>
+					<p><img src="images/gTSF-chewing.png"></p>
 				</section>
 
 				<section>
 					<h1>We are hiring</h1>
 					<p>Send a pull request to <a href="https://github.com/chewing/libchewing](https://github.com/chewing/libchewing">https://github.com/chewing/libchewing</a>
-					<p><img src="data/we_are_hiring.png"></p>
+					<p><img src="images/gwe_are_hiring.png"></p>
 				</section>
 			</div>
 
