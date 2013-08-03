@@ -55,12 +55,14 @@
 						<li>有新的 <a href="https://github.com/chewing/libchewing/issues">bugs</a></li>
 						<li>需要新的 contributors</li>
 					</ul>
-					<!--a href="https://launchpad.net/~chewing/+archive/chewing">chewing daily build ppa</a>安裝</p>
-					<pre><code data-trim contenteditable>
-sudo add-apt-repository ppa:chewing/chewing
-sudo apt-get update
-sudo apt-get upgrade
-					</code></pre-->
+					<aside class="notes">
+						<ul>
+							<li>7/28 0.3.5 release</li>
+							<li>8/2 first bug after release</li>
+							<li>8/3 new doamin online</li>
+							<li>8/4 need new contributor</li>
+						</ul>
+					</aside>
 				</section>
 
 				<section>
@@ -438,6 +440,7 @@ Date:   Sat Jun 22 20:34:35 2013 +0800
 
 				<section>
 					<p><a href="http://lists.gnu.org/archive/html/libtool/2009-03/msg00026.html">-no-undefined support for GNU/Linux</a><p>
+					<p><img src="data/no_undefined.png"></p>
 				</section>
 
 				<section>
@@ -483,6 +486,10 @@ Date:   Sat Jun 22 20:34:35 2013 +0800
 				<section>
 					<p>在 Travis CI 跑完後跑一下 coveralls 就好了</p>
 					<a href="https://coveralls.io/docs/cpp">https://coveralls.io/docs/cpp</a>
+					<pre><code data-trim contenteditable>
+after_success:
+  - if [ x$COVERALLS == xyes ]; then coveralls ; fi
+					</code></pre>
 				</section>
 
 				<section>
@@ -551,11 +558,10 @@ nest-part packaging lp:~chewing/libchewing/debianize debian debian
 def add_info(report):
     report['CrashDB'] = '{"impl": "launchpad", "project": "libchewing"}'
 					</code></pre>
-				</section>
-
-				<section>
-					<p>不過 ubuntu 會用執行檔來找有問題的 package</p>
-					<p>所以 package-name 要設成 ibus-chewing ... 等，而不是 libchewing</p>
+					<aside class="notes">
+						<p>不過 ubuntu 會用執行檔來找有問題的 package</p>
+						<p>所以 package-name 要設成 ibus-chewing ... 等，而不是 libchewing</p>
+					</aside>
 				</section>
 
 				<section>
