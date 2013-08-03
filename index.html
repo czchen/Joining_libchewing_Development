@@ -80,17 +80,17 @@
 
 				<section>
 					<p>Send pull request</p>
-					<img src="images/gpull_14.png" alt="pull request 14">
+					<img src="images/pull_14.png" alt="pull request 14">
 				</section>
 
 				<section>
 					<p>感覺 Unit Test 有點少，會不會改出問題阿？</p>
-					<img src="images/gold_test.png">
+					<img src="images/old_test.png">
 				</section>
 
 				<section>
 					<a href="https://github.com/chewing/libchewing/issues/26">https://github.com/chewing/libchewing/issues/26</a>
-					<img src="images/gissue_26.png">
+					<img src="images/issue_26.png">
 				</section>
 
 				<section>
@@ -99,7 +99,7 @@
 
 				<section>
 					<p>Fixed</p>
-					<img src="images/gissue_26_fix.png">
+					<img src="images/issue_26_fix.png">
 				</section>
 
 				<section>
@@ -128,7 +128,7 @@ AS_IF([test x$ENABLE_GCOV = x"true"],
 
 				<section>
 					<p><a href="http://kanru.info/chewing/lcov-check/">http://kanru.info/chewing/lcov-check/</a></p>
-					<img src="images/ginitial_coverage.png">
+					<img src="images/initial_coverage.png">
 				</section>
 
 				<section>
@@ -202,7 +202,7 @@ for (i = 0; i &lt; ARRAY_SIZE(VALUE); ++i) {
 				<section>
 					<p>看起來好多了</p>
 					<p><a href="https://drone.io/github.com/chewing/libchewing/files">https://drone.io/github.com/chewing/libchewing/files</a></p>
-					<img src="images/gcoverage.png">
+					<img src="images/coverage.png">
 				</section>
 
 				<section>
@@ -246,7 +246,7 @@ chcp 65001
 
 				<section>
 					<p>不過我不會 CMake，先抓個 <a href="http://www.cmake.org/cmake/help/cmake_tutorial.html">tutorial</a> 來看看吧</p>
-					<p><img src="images/gcmake_tutorial.png"></p>
+					<p><img src="images/cmake_tutorial.png"></p>
 				</section>
 
 				<section>
@@ -255,12 +255,12 @@ chcp 65001
 
 				<section>
 					<p>libchewing build process</p>
-					<img src="images/gbuild.png">
+					<img src="images/build.png">
 				</section>
 
 				<section>
 					<p>依照 <a href="http://www.cmake.org/cmake/help/documentation.html">CMake manual</a> 上的說明把對應的 command 找出來</p>
-					<img src="images/gbuild_cmake.png">
+					<img src="images/build_cmake.png">
 				</section>
 
 				<section>
@@ -304,7 +304,7 @@ set_target_properties(${ALL_TOOLS} PROPERTIES
 				<section>
 					<p>拿掉 designated initializer</p>
 					<p><a href="http://social.msdn.microsoft.com/Forums/en-US/vclanguage/thread/363d81f6-2308-492d-b530-2614b333e9e0/#aeece11a-ce75-434a-b140-cb54356d904e">C99 Designated Initializers support</a></p>
-					<img src="images/gvisual_studio_designated_initializer.png">
+					<img src="images/visual_studio_designated_initializer.png">
 					<pre><code data-trim contenteditable>
 static const ChewingConfigData DEFAULT_CONFIG = {
     .candPerPage = MAX_SELKEY,
@@ -318,12 +318,12 @@ static const ChewingConfigData DEFAULT_CONFIG = {
 					<pre><code data-trim contenteditable>
 cmake PATH -G "Visual Studio 11 Win64"
 					</code></pre>
-					<img src="images/gVisual_Studio_Solution.png">
+					<img src="images/Visual_Studio_Solution.png">
 				</section>
 
 				<section>
 					<p>unit test 也可以用</p>
-					<img src="images/gVisual_Studio_Testing.png">
+					<img src="images/Visual_Studio_Testing.png">
 				</section>
 
 				<section>
@@ -359,7 +359,7 @@ CC=clang CFLAGS+=-fsanitize=address
 
 				<section>
 					<p>用 <a href="https://code.google.com/p/include-what-you-use/">include-what-you-use</a> 清 include</p>
-					<p><img src="images/ginclude-what-you-use.png"></p>
+					<p><img src="images/include-what-you-use.png"></p>
 				</section>
 
 				<section>
@@ -428,13 +428,13 @@ Date:   Sat Jun 22 20:34:35 2013 +0800
 				<section>
 					<p>修好後順便送了 patch 到 debian</p>
 					<p><a href="http://bugs.debian.org/709934">debian #709934</a></p>
-					<p><img src="images/gdebian_709934.png"></p>
+					<p><img src="images/debian_709934.png"></p>
 				</section>
 
 				<section>
 					<p>不過只 patch 到 Makefile.am，Makefile 本身忘了 patch</p>
 					<p><a href="http://bugs.debian.org/712883">debian #712883</a></p>
-					<p><img src="images/gdebian_712883.png"></p>
+					<p><img src="images/debian_712883.png"></p>
 				</section>
 
 				<section>
@@ -443,7 +443,7 @@ Date:   Sat Jun 22 20:34:35 2013 +0800
 
 				<section>
 					<p><a href="http://lists.gnu.org/archive/html/libtool/2009-03/msg00026.html">-no-undefined support for GNU/Linux</a><p>
-					<p><img src="images/gno_undefined.png"></p>
+					<p><img src="images/no_undefined.png"></p>
 				</section>
 
 				<section>
@@ -462,7 +462,7 @@ Date:   Sat Jun 22 20:34:35 2013 +0800
 					<h3>Travis CI</h3>
 					<p>Powered by kanru</p>
 					<p><a href="https://travis-ci.org/chewing/libchewing">https://travis-ci.org/chewing/libchewing</a></p>
-					<img src="images/gtravis-ci.png">
+					<img src="images/travis-ci.png">
 				</section>
 
 				<section>
@@ -504,7 +504,7 @@ matrix:
 				<section>
 					<h3>COVERALLS</h3>
 					<a href="https://coveralls.io/r/chewing/libchewing">https://coveralls.io/r/chewing/libchewing</a>
-					<img src="images/gcoveralls.io.png">
+					<img src="images/coveralls.io.png">
 				</section>
 
 				<section>
@@ -519,7 +519,7 @@ after_success:
 				<section>
 					<h3>drone.io</h3>
 					<a href="https://drone.io/github.com/chewing/libchewing">https://drone.io/github.com/chewing/libchewing</a>
-					<img src="images/gdrone.io.png">
+					<img src="images/drone.io.png">
 				</section>
 
 				<section>
@@ -543,14 +543,14 @@ libchewing-*.tar.gz
 				<section>
 					<p>就可以產生 package 和 coverage report</p>
 					<a href="https://drone.io/github.com/chewing/libchewing/files">https://drone.io/github.com/chewing/libchewing/files</a>
-					<img src="images/gdrone.io.download.png">
+					<img src="images/drone.io.download.png">
 				</section>
 
 				<section>
 					<h3>Launchpad daily-build PPA</h3>
 					<p>Powered by Shawn</p>
 					<p><a href="https://launchpad.net/~chewing/+archive/chewing">https://launchpad.net/~chewing/+archive/chewing</a></p>
-					<img src="images/glaunchpad.net.png">
+					<img src="images/launchpad.net.png">
 				</section>
 
 				<section>
@@ -591,7 +591,7 @@ def add_info(report):
 				<section>
 					<p>這樣就可以直接產生 bug report 到 Launchpad 上</p>
 					<p><a href="https://bugs.launchpad.net/libchewing/+bug/1197795">bug report example </a></p>
-					<p><img src="images/glaunchpad.net_bug_report.png"></p>
+					<p><img src="images/launchpad.net_bug_report.png"></p>
 				</section>
 
 				<section>
@@ -601,7 +601,7 @@ def add_info(report):
 				<section>
 					<p>ㄍㄢˇ ㄗㄡˇ → 趕人</p>
 					<p><a href="https://groups.google.com/forum/#!topic/chewing-devel/tzNOjgYyzdQ">Google Group Chewing IM Development</a></p>
-					<p><img src="images/gdata_problem.png"></p>
+					<p><img src="images/data_problem.png"></p>
 				</section>
 
 				<section>
@@ -694,7 +694,7 @@ if (a->freq == b->freq) {
 
 				<section>
 					<p>有 sample code，應該改一下就可以用了</p>
-					<p><img src="images/gTSF-sample.png"></p>
+					<p><img src="images/TSF-sample.png"></p>
 				</section>
 
 				<section>
@@ -707,23 +707,23 @@ if (a->freq == b->freq) {
 
 				<section>
 					<p>好像哪裡怪怪的</p>
-					<p><img src="images/gTSF-sample-comment.png"></p>
+					<p><img src="images/TSF-sample-comment.png"></p>
 				</section>
 
 				<section>
 					<p>連連看時間</p>
-					<p><img src="images/gTSF-sample-comparison.png"></p>
+					<p><img src="images/TSF-sample-comparison.png"></p>
 				</section>
 
 				<section>
 					<p>POC 在 <a href="https://github.com/czchen/TSF-chewing">https://github.com/czchen/TSF-chewing</a></p>
-					<p><img src="images/gTSF-chewing.png"></p>
+					<p><img src="images/TSF-chewing.png"></p>
 				</section>
 
 				<section>
 					<h1>We are hiring</h1>
 					<p>Send a pull request to <a href="https://github.com/chewing/libchewing](https://github.com/chewing/libchewing">https://github.com/chewing/libchewing</a>
-					<p><img src="images/gwe_are_hiring.png"></p>
+					<p><img src="images/we_are_hiring.png"></p>
 				</section>
 			</div>
 
