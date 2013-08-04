@@ -224,7 +224,7 @@ make
 
 				<section>
 					<p>有些小問題需要注意一下</p>
-					<p>CR/LF → CR</p>
+					<p>CR/LF → LF</p>
 					<pre><code data-trim contenteditable>
 git config core.autocrlf input
 rm -rf *
@@ -577,7 +577,7 @@ nest-part packaging lp:~chewing/libchewing/debianize debian debian
 				</section>
 
 				<section>
-					<p>基本上把下面的 code 放到 /usr/share/apport/package-hooks/&lt;pacage-name&gt;.py 就好了</p>
+					<p>基本上把下面的 code 放到 /usr/share/apport/package-hooks/&lt;package-name&gt;.py 就好了</p>
 					<pre><code data-trim contenteditable>
 def add_info(report):
     report['CrashDB'] = '{"impl": "launchpad", "project": "libchewing"}'
